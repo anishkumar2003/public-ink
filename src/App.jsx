@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import config from './config/config'
+import {Header,Footer} from './components/index'
 function App() {
   return (
     <div className='bg-black text-white'>
-      Hello world
-
+      <Header/>
+      <Footer/>      
     </div>
   )
 }
