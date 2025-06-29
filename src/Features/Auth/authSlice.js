@@ -7,10 +7,10 @@ const initialState = {
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState, // ✅ Fixed spelling
+  initialState, 
   reducers: {
     login: (state, action) => {
-      state.status = action.payload.status;
+      state.status = true;
       state.userData = action.payload.userData;
     },
     logout: (state) => {
