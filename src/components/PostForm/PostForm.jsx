@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../../index";
 import appwriteService from "../../appwrite/dbConfig";
@@ -19,50 +19,53 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
-        console.log(post);
+        console.log("Form Data:", data);
+
         if (post) {
-            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
-            console.log(file);
-            if (file) {
-                appwriteService.deleteFile(post.image);
+            // If editing an existing post
+            const file = data.image?.[0] ? await appwriteService.uploadFile(data.image[0]) : null;
+
+            if (file && post.image) {
+                await appwriteService.deleteFile(post.image); // Delete old image if new one is uploaded
             }
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
-                image: file ? file.$id : undefined,
+                image: file ? file.$id : post.image, // Use new image if uploaded, else keep old one
             });
 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
+
         } else {
-            const file = await appwriteService.uploadFile(data.image[0]);
-            console.log(file)
+            // New post creation
+            const file = data.image?.[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
-            if (file) {
-                const fileId = file.$id;
-                data.image = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+            const dbPost = await appwriteService.createPost({
+                ...data,
+                image: file?.$id, // Optional image
+                userId: userData.$id,
+            });
 
-                if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`);
-                }
+            if (dbPost) {
+                navigate(`/post/${dbPost.$id}`);
             }
         }
     };
 
     const slugTransform = useCallback((value) => {
-        if (value && typeof value === "string")
+        if (value && typeof value === "string") {
             return value
                 .trim()
                 .toLowerCase()
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 .replace(/\s/g, "-");
-
+        }
         return "";
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
                 setValue("slug", slugTransform(value.title), { shouldValidate: true });
@@ -90,17 +93,23 @@ export default function PostForm({ post }) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE
+                    label="Content :"
+                    name="content"
+                    control={control}
+                    defaultValue={getValues("content")}
+                />
             </div>
+
             <div className="w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !post })}
+                    {...register("image", { required: false })}
                 />
-                {post && (
+                {post?.image && (
                     <div className="w-full mb-4">
                         <img
                             src={appwriteService.getFilePreview(post.image)}
@@ -115,7 +124,11 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button
+                    type="submit"
+                    bgColor={post ? "bg-green-500" : undefined}
+                    className="w-full"
+                >
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>

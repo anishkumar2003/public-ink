@@ -52,7 +52,6 @@ function App() {
         <Route path="/add-post" element={<AuthLayout authentication><AddPost /></AuthLayout>} />
         <Route path="/edit-post/:slug" element={<AuthLayout authentication><EditPost /></AuthLayout>} />
         <Route path="/post/:slug" element={<Post />} />
-        {/* <Route path="/logout" element={<></>}/> */}
       </Routes>
       </div>
 
