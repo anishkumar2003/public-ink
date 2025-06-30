@@ -11,7 +11,7 @@ import Signup from './components/Pages/Signup';
 import EditPost from './components/Pages/EditPost';
 import Post from './components/Pages/post';
 import AddPost from './components/Pages/AddPost';
-import AllPosts from './components/pages/AllPosts';
+import AllPosts from './components/Pages/AllPosts';
 import { AuthLayout } from './index';
 
 function App() {
