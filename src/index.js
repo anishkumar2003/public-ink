@@ -1,5 +1,5 @@
-import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
+import Header from "./components/header/Header.jsx";
+import Footer from "./components/footer/Footer.jsx";
 import Container from "./container/Container";
 import Input from "./components/Input.jsx";
 import Button from './components/Button';
