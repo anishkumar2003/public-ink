@@ -17,10 +17,10 @@ export default function PostForm({ post }) {
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    console.log(userData);
+    // console.log(userData);
 
     const submit = async (data) => {
-        console.log("Form Data:", data);
+        // console.log("Form Data:", data);
 
         if (post) {
             // If editing an existing post
