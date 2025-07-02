@@ -1,0 +1,18 @@
+<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .text { fill: white; font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; font-size: 32px; font-weight: bold; }
+    .icon { fill: white; }
+    .bg { fill: #1E1E2F; } /* Dark background */
+  </style>
+  <rect class="bg" width="300" height="150" rx="20" />
+  <g transform="translate(20,25)">
+    <!-- Ink Drop Icon -->
+    <path class="icon" d="M30 10 C25 -5, 5 -5, 10 20 C15 40, 30 40, 30 25 Z" />
+    
+    <!-- Pen Tip -->
+    <polygon class="icon" points="28,22 32,22 30,35" />
+    
+    <!-- Logo Text -->
+    <text x="60" y="40" class="text">PublicInk</text>
+  </g>
+</svg>
