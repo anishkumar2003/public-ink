@@ -4,6 +4,7 @@ import { Controller,useForm } from "react-hook-form";
 import config  from "../config/config";
 function Rte({name, control, label, defaultValue =""})
 {
+    console.log(config.tinymceApiKey);
     return(
         <div className='w-full'> 
         {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
