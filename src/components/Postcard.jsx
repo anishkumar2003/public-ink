@@ -6,7 +6,7 @@ function PostCard({$id, title, image}) {
     
   return (
     <Link to={`/post/${$id}`}>
-        <div className='w-full bg-gray-800 rounded-xl p-4'>
+        <div className='w-full bg-gray-800 rounded-xl p-4 min-h-[10rem] justify-center items-center'>
             <div className='w-full justify-center mb-4'>
                 {/* <img src={authService.getFilePreview(image)} alt={title}
                 className='rounded-xl' /> */}
