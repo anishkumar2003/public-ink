@@ -85,7 +85,8 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("title", { required: true })}
                 />
-                <Input
+                <div className="hidden">
+                    <Input
                     label="Slug :"
                     placeholder="Slug"
                     className="mb-4"
@@ -94,6 +95,7 @@ export default function PostForm({ post }) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
+                </div>
                 <RTE
                     label="Content :"
                     name="content"

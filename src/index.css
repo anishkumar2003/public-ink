@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+.border-container {
+  position: relative;
+  border-radius: 0.75rem; /* same as rounded-xl */
+  overflow: hidden;
+  padding: 2px; /* space for border illusion */
+}
+
+.border-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: conic-gradient(from 0deg, #3b82f6, transparent, #3b82f6);
+  animation: rotateBorder 3s linear infinite;
+}
+
+.inner-content {
+  position: relative;
+  z-index: 10;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+/* Keyframes for rotation */
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
