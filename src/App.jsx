@@ -41,21 +41,29 @@ function App() {
   }
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white">
-      <Header />
-      <div className='min-h-[53vh]'>
-        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<AuthLayout authentication={true}><Login /></AuthLayout>} />
-        <Route path="/signup" element={<AuthLayout authentication={false}><Signup /></AuthLayout>} />
-        <Route path="/all-posts" element={<AuthLayout authentication><AllPosts /></AuthLayout>} />
-        <Route path="/add-post" element={<AuthLayout authentication><AddPost /></AuthLayout>} />
-        <Route path="/edit-post/:slug" element={<AuthLayout authentication><EditPost /></AuthLayout>} />
-        <Route path="/post/:slug" element={<Post />} />
-      </Routes>
+    <div className="bg-gray-900 min-h-screen text-white flex flex-col">
+      <div className="block md:hidden flex-1 flex justify-center items-center px-4 text-center mt-50%">
+        <p className="text-xl font-semibold">
+          <marquee>Soon available on mobile</marquee>
+          This site is only available on desktop. Please use a larger screen.
+        </p>
       </div>
 
-      <Footer />
+      <div className="hidden md:block flex-1">
+        <Header />
+        <div className="min-h-[53vh]">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<AuthLayout authentication={true}><Login /></AuthLayout>} />
+            <Route path="/signup" element={<AuthLayout authentication={false}><Signup /></AuthLayout>} />
+            <Route path="/all-posts" element={<AuthLayout authentication><AllPosts /></AuthLayout>} />
+            <Route path="/add-post" element={<AuthLayout authentication><AddPost /></AuthLayout>} />
+            <Route path="/edit-post/:slug" element={<AuthLayout authentication><EditPost /></AuthLayout>} />
+            <Route path="/post/:slug" element={<Post />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }
